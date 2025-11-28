@@ -25,72 +25,65 @@
 
         * { box-sizing: border-box; }
 
+        /* --- ESTRUCTURA FLEXBOX PARA FOOTER SIEMPRE ABAJO --- */
+        html, body { height: 100%; margin: 0; }
+
         body {
             font-family: 'Roboto', sans-serif;
             background-color: var(--brand-white);
             color: var(--brand-black);
-            margin: 0;
-            padding-bottom: 80px;
             line-height: 1.6;
+            display: flex; flex-direction: column;
         }
 
+        /* CONFIGURACIÓN DE ESPACIADO UNIFORME */
+        main {
+            flex: 1; /* Ocupa todo el espacio disponible */
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            /* AQUÍ ESTÁ EL CONTROL DEL AIRE SUPERIOR */
+            padding: 60px 20px 0 20px; 
+        }
+
+        /* CLASE PARA REINICIAR MÁRGENES SUPERIORES */
+        /* Esto asegura que todas las pestañas empiecen a la misma altura */
+        .section > *:first-child { margin-top: 0 !important; }
+
         h1, h2, h3, h4, .nav-logo, .btn-download, .step-number {
-            font-family: 'Oswald', sans-serif;
-            text-transform: uppercase;
+            font-family: 'Oswald', sans-serif; text-transform: uppercase;
         }
 
         /* --- NAVEGACIÓN --- */
         nav {
             background: var(--brand-black);
             padding: 1rem 5%;
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            position: sticky; top: 0; z-index: 1000;
+            display: flex; justify-content: space-between; align-items: center;
             border-bottom: 4px solid var(--brand-red);
             box-shadow: 0 4px 10px rgba(0,0,0,0.3);
         }
 
         .nav-logo { 
-            font-size: 1.5rem; 
-            letter-spacing: 1px; 
-            font-weight: 700; 
-            color: var(--brand-white); 
-            text-decoration: none;
+            font-size: 1.5rem; letter-spacing: 1px; font-weight: 700; color: var(--brand-white); text-decoration: none;
             display: flex; align-items: center; gap: 10px;
         }
         .nav-logo span { color: var(--brand-red); }
 
         .nav-menu { display: flex; gap: 10px; }
-        
         .nav-btn {
-            background: transparent;
-            border: 1px solid transparent;
-            color: #ccc;
-            cursor: pointer;
-            font-family: 'Oswald', sans-serif;
-            font-size: 0.9rem;
-            padding: 8px 12px;
-            transition: 0.3s;
+            background: transparent; border: 1px solid transparent; color: #ccc; cursor: pointer;
+            font-family: 'Oswald', sans-serif; font-size: 0.9rem; padding: 8px 12px; transition: 0.3s;
             display: flex; align-items: center; gap: 6px;
         }
+        .nav-btn:hover, .nav-btn.active { color: white; background: rgba(255, 255, 255, 0.1); border: 1px solid var(--brand-red); }
 
-        .nav-btn:hover, .nav-btn.active {
-            color: white;
-            background: rgba(255, 255, 255, 0.1);
-            border: 1px solid var(--brand-red);
-        }
-
-        /* --- LAYOUT GENERAL --- */
-        main { max-width: 1200px; margin: 0 auto; padding: 30px 20px; }
-
+        /* --- SECCIONES (Animación) --- */
         .section { display: none; animation: fadeIn 0.5s ease-in-out; }
         .section.active { display: block; }
         @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
-        /* --- SECCIÓN HERO --- */
+        /* --- HERO --- */
         .hero-wrapper {
             display: flex; flex-wrap: wrap; align-items: center; gap: 40px;
             margin-bottom: 60px; background: var(--brand-gray); padding: 40px;
@@ -100,23 +93,21 @@
         .hero-title { font-size: 3.5rem; line-height: 1; margin: 0 0 20px 0; color: var(--brand-black); }
         .hero-title span { color: var(--brand-red); display: block; }
         .hero-text { font-size: 1.1rem; color: #444; margin-bottom: 30px; }
-        
         .hero-visual { flex: 1; min-width: 280px; display: flex; justify-content: center; }
         .poster-frame {
-            width: 100%; max-width: 300px; height: auto; aspect-ratio: 2/3;
-            object-fit: cover; border: 8px solid white;
-            box-shadow: 0 15px 30px rgba(0,0,0,0.3);
+            width: 100%; max-width: 300px; height: auto; aspect-ratio: 2/3; object-fit: cover;
+            border: 8px solid white; box-shadow: 0 15px 30px rgba(0,0,0,0.3);
             transform: rotate(3deg); transition: transform 0.3s ease;
         }
         .poster-frame:hover { transform: rotate(0deg) scale(1.02); }
 
-        /* --- INFO GRID (ODS / Problema) --- */
+        /* --- INFO CARDS --- */
         .info-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-bottom: 60px; }
         .card { background: white; border: 2px solid #e0e0e0; padding: 30px; border-left: 5px solid var(--brand-red); transition: 0.3s; }
         .card:hover { border-color: var(--brand-black); box-shadow: var(--shadow-hard); transform: translateY(-5px); }
         .card-icon { font-size: 2rem; color: var(--brand-red); margin-bottom: 15px; }
 
-        /* --- ODS DETALLADAS --- */
+        /* --- ODS --- */
         .ods-container { background: var(--brand-dark); color: white; padding: 30px; border-radius: 4px; }
         .ods-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
         .ods-item { text-align: center; padding: 20px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); }
@@ -124,22 +115,19 @@
         .ods-item h4 { margin-bottom: 10px; color: var(--brand-red); }
         .ods-item p { font-size: 0.9rem; color: #ccc; }
 
-        /* --- SECCIÓN INGENIERÍA (PROTOTIPO) --- */
+        /* --- PROTOTIPO & ZOOM --- */
         .prototipo-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 40px; margin-bottom: 40px; }
         .resource-card { display: flex; flex-direction: column; background: white; border: 1px solid #ddd; overflow: hidden; transition: 0.3s; }
         .resource-card:hover { box-shadow: 0 5px 15px rgba(0,0,0,0.1); border-color: var(--brand-red); }
-
-        /* IMÁGENES ESTÁNDAR 16:9 */
+        
         .std-img-container {
-            width: 100%;
-            aspect-ratio: 16/9; /* Proporción panorámica estándar */
-            background: #eee;
-            border-bottom: 1px solid #eee;
-            overflow: hidden;
+            width: 100%; aspect-ratio: 16/9; background: #eee; border-bottom: 1px solid #eee;
+            overflow: hidden; position: relative; cursor: zoom-in;
         }
-        .std-img { width: 100%; height: 100%; object-fit: cover; }
-        /* Para diagramas, usar object-fit: contain para que no se corten */
+        .std-img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; transform-origin: center center; }
         .contain-img { object-fit: contain; background: #fff; }
+        .std-img-container:hover .std-img { transform: scale(1.2); }
+        .std-img.zoomed { transform: scale(2.0) !important; cursor: zoom-out; }
 
         .resource-content { padding: 25px; flex: 1; }
         .btn-download {
@@ -148,61 +136,70 @@
         }
         .btn-download:hover { background: var(--brand-red); }
 
-        /* --- SECCIÓN PROCESO (GRILLA 2x3) --- */
-        .process-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); /* 2 por fila en PC */
-            gap: 30px;
-            margin-top: 40px;
-        }
-
-        .step-card {
-            background: white;
-            border: 2px solid var(--brand-black);
-            display: flex; flex-direction: column;
-            box-shadow: var(--shadow-hard);
-        }
-
-        .step-header {
-            background: var(--brand-black); color: white; padding: 10px 20px;
-            display: flex; justify-content: space-between; align-items: center;
-        }
+        /* --- PROCESO --- */
+        .process-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); gap: 30px; margin-top: 40px; }
+        .step-card { background: white; border: 2px solid var(--brand-black); display: flex; flex-direction: column; box-shadow: var(--shadow-hard); }
+        .step-header { background: var(--brand-black); color: white; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; }
         .step-number { font-size: 1.5rem; font-weight: bold; color: var(--brand-red); }
         .step-body { padding: 20px; flex: 1; display: flex; flex-direction: column; }
-        .step-body p { flex: 1; } /* Empuja la imagen hacia abajo */
+        .step-body p { flex: 1; }
 
         /* --- CÓDIGO --- */
         .code-container { margin-top: 40px; border: 2px solid var(--brand-black); background: #1a1a1a; }
         .code-header { background: var(--brand-red); color: white; padding: 10px 20px; font-family: 'Oswald', sans-serif; }
         .code-block {
-            background: #1E1E1E; color: #D4D4D4; padding: 20px;
-            font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem;
+            background: #1E1E1E; color: #D4D4D4; padding: 20px; font-family: 'Fira Code', 'Consolas', monospace; font-size: 0.85rem;
             max-height: 400px; overflow-y: auto; white-space: pre;
         }
         .code-block::-webkit-scrollbar { width: 8px; }
         .code-block::-webkit-scrollbar-thumb { background: #555; }
 
-        /* --- EQUIPO --- */
-        .team-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; margin-top: 40px; }
-        .member {
-            background: white; border: 1px solid #ddd; text-align: center; padding: 30px 15px;
-            transition: 0.3s; position: relative; overflow: hidden;
+        /* --- EQUIPO (3 ARRIBA, 2 ABAJO) --- */
+        .team-container-flex {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center; /* ESTO CENTRA LOS ELEMENTOS (3 arriba, 2 abajo centrados) */
+            gap: 30px;
+            margin-top: 40px;
         }
-        .member:hover { border-color: var(--brand-red); box-shadow: 0 10px 20px rgba(0,0,0,0.1); }
+
+        .member {
+            background: white; border: 1px solid #ddd; text-align: center; padding: 30px 20px;
+            transition: 0.3s; position: relative; overflow: hidden;
+            display: flex; flex-direction: column; align-items: center;
+            /* Ancho fijo para forzar el wrap correcto en PC */
+            width: 300px; 
+            max-width: 100%;
+        }
+        .member:hover { border-color: var(--brand-red); box-shadow: 0 10px 20px rgba(0,0,0,0.1); transform: translateY(-5px); }
+        
         .avatar-circle {
             width: 100px; height: 100px; background: #eee; border-radius: 50%;
             margin: 0 auto 15px; display: flex; align-items: center; justify-content: center;
-            font-size: 2.5rem; color: #aaa; border: 3px solid white; box-shadow: 0 0 0 2px #eee;
+            font-size: 2.5rem; color: #aaa; border: 3px solid white; box-shadow: 0 0 0 2px #eee; flex-shrink: 0;
         }
-        .role { font-size: 0.8rem; font-weight: 700; color: var(--brand-red); text-transform: uppercase; }
+        .member h3 { font-size: 1.1rem; margin: 10px 0 5px 0; word-wrap: break-word; width: 100%;}
+        .role { font-size: 0.8rem; font-weight: 700; color: var(--brand-red); text-transform: uppercase; margin-bottom: 10px; }
+        .desc { font-size: 0.85rem; color: #666; line-height: 1.4; }
 
-        footer { margin-top: 80px; text-align: center; border-top: 1px solid #eee; padding-top: 40px; color: #666; font-size: 0.9rem; }
+        /* --- FOOTER (ESPACIADO CONTROLADO) --- */
+        footer {
+            background: #111;
+            color: #777;
+            text-align: center;
+            padding: 40px 20px;
+            /* IMPORTANTE: Margen superior grande para separar del contenido */
+            margin-top: 80px; 
+            width: 100%;
+            border-top: 1px solid #333;
+        }
 
         @media (max-width: 850px) {
             .hero-title { font-size: 2.8rem; }
             .nav-menu span { display: none; }
             .hero-wrapper { flex-direction: column-reverse; text-align: center; }
-            .prototipo-grid, .process-grid { grid-template-columns: 1fr; } /* 1 columna en móvil */
+            .prototipo-grid, .process-grid { grid-template-columns: 1fr; }
+            .member { width: 100%; } /* En móvil ocupan todo el ancho */
         }
     </style>
 </head>
@@ -249,7 +246,7 @@
                 <div class="card">
                     <i class="fas fa-exclamation-triangle card-icon"></i>
                     <h3>La Problemática</h3>
-                    <p>El "Síndrome Visual Informático" afecta al 70% de estudiantes. Usar el smartphone para descansar es contraproducente por los bucles de dopamina.</p>
+                    <p>El "Síndrome Visual Informático" afecta al 70% de estudiantes. Usar el smartphone para descansar es contraproducente.</p>
                 </div>
                 <div class="card">
                     <i class="fas fa-check-circle card-icon"></i>
@@ -264,17 +261,17 @@
                     <div class="ods-item">
                         <i class="fas fa-heartbeat"></i>
                         <h4>ODS 3: Salud y Bienestar</h4>
-                        <p>Reducción de la fatiga visual y el estrés digital mediante la promoción de pausas activas y desconexión programada.</p>
+                        <p>Reducción de la fatiga visual y el estrés digital mediante la promoción de pausas activas.</p>
                     </div>
                     <div class="ods-item">
                         <i class="fas fa-brain"></i>
                         <h4>ODS 4: Educación de Calidad</h4>
-                        <p>Mejora de los hábitos de estudio y la concentración profunda ("Deep Work") en entornos académicos.</p>
+                        <p>Mejora de los hábitos de estudio y la concentración profunda ("Deep Work").</p>
                     </div>
                     <div class="ods-item">
                         <i class="fas fa-industry"></i>
-                        <h4>ODS 9: Innovación e Infraestructura</h4>
-                        <p>Fomento del desarrollo de hardware libre (Open Source) y tecnologías de fabricación digital (Impresión 3D).</p>
+                        <h4>ODS 9: Innovación</h4>
+                        <p>Fomento del desarrollo de hardware libre y tecnologías de fabricación digital.</p>
                     </div>
                 </div>
             </div>
@@ -286,19 +283,19 @@
 
             <div class="prototipo-grid">
                 <div class="resource-card">
-                    <div class="std-img-container">
-                        <img src="diagrama.jpg" class="std-img contain-img" alt="Diagrama" onerror="this.src='https://images.unsplash.com/photo-1553406830-ef2513450d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    <div class="std-img-container" onclick="toggleZoom(this.querySelector('img'))">
+                        <img src="diagrama.jpg" class="std-img contain-img" alt="Diagrama" title="Click para Zoom" onerror="this.src='https://images.unsplash.com/photo-1553406830-ef2513450d76?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                     </div>
                     <div class="resource-content">
                         <h3><i class="fas fa-microchip"></i> Diagrama de Conexiones</h3>
-                        <p>Esquema electrónico detallado (Fritzing) mostrando las conexiones I2C del LCD y los pines PWM para el LED RGB.</p>
+                        <p>Esquema electrónico detallado (Fritzing) mostrando las conexiones I2C del LCD y los pines PWM.</p>
                         <a href="diagrama.pdf" download class="btn-download"><i class="fas fa-file-pdf"></i> DESCARGAR PDF</a>
                     </div>
                 </div>
 
                 <div class="resource-card">
-                    <div class="std-img-container">
-                        <img src="carcasa.jpg" class="std-img" alt="Render 3D" onerror="this.src='https://images.unsplash.com/photo-1631541909061-71e349d1f203?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
+                    <div class="std-img-container" onclick="toggleZoom(this.querySelector('img'))">
+                        <img src="carcasa.jpg" class="std-img" alt="Render 3D" title="Click para Zoom" onerror="this.src='https://images.unsplash.com/photo-1631541909061-71e349d1f203?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80'">
                     </div>
                     <div class="resource-content">
                         <h3><i class="fas fa-cube"></i> Planos Carcasa 3D</h3>
@@ -525,9 +522,7 @@ void alarmaFin() {
 
         <div id="proceso" class="section">
             <h2 style="text-align:center; margin-bottom:50px;">EVIDENCIA DEL PROCESO</h2>
-            
             <div class="process-grid">
-                
                 <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 01</span><i class="fas fa-lightbulb"></i></div>
                     <div class="step-body">
@@ -538,7 +533,6 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
                 <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 02</span><i class="fas fa-plug"></i></div>
                     <div class="step-body">
@@ -549,7 +543,6 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
                 <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 03</span><i class="fas fa-laptop-code"></i></div>
                     <div class="step-body">
@@ -560,7 +553,6 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
                 <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 04</span><i class="fas fa-cubes"></i></div>
                     <div class="step-body">
@@ -571,7 +563,6 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
                 <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 05</span><i class="fas fa-print"></i></div>
                     <div class="step-body">
@@ -582,7 +573,6 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
                  <div class="step-card">
                     <div class="step-header"><span class="step-number">PASO 06</span><i class="fas fa-check-double"></i></div>
                     <div class="step-body">
@@ -593,37 +583,46 @@ void alarmaFin() {
                         </div>
                     </div>
                 </div>
-
             </div>
         </div>
 
         <div id="equipo" class="section">
             <h2 style="text-align:center;">NUESTRO EQUIPO</h2>
-            <div class="team-grid">
+            
+            <div class="team-container-flex">
                 <div class="member">
                     <div class="avatar-circle"><i class="fas fa-user"></i></div>
-                    <h3>Nombre 1</h3>
-                    <div class="role">Líder / Dev</div>
+                    <h3>Nombre de Prueba Largo Largo</h3>
+                    <div class="role">Project Manager / Lead Dev</div>
+                    <div class="desc">Responsable de coordinar el cronograma del proyecto y desarrollar la arquitectura principal del software en C++.</div>
                 </div>
+
                 <div class="member">
                     <div class="avatar-circle"><i class="fas fa-tools"></i></div>
-                    <h3>Nombre 2</h3>
-                    <div class="role">Hardware</div>
+                    <h3>Nombre de Prueba Largo Largo</h3>
+                    <div class="role">Ingeniero de Hardware</div>
+                    <div class="desc">Encargado del diseño esquemático, selección de componentes electrónicos, soldadura y ensamblaje de PCBs.</div>
                 </div>
+
                 <div class="member">
                     <div class="avatar-circle"><i class="fas fa-paint-brush"></i></div>
-                    <h3>Nombre 3</h3>
-                    <div class="role">Diseño 3D</div>
+                    <h3>Nombre de Prueba Largo Largo</h3>
+                    <div class="role">Diseñador Industrial 3D</div>
+                    <div class="desc">Realizó el modelado CAD de la carcasa, optimización para impresión 3D y ergonomía del dispositivo.</div>
                 </div>
+
                 <div class="member">
                     <div class="avatar-circle"><i class="fas fa-pencil-ruler"></i></div>
-                    <h3>Nombre 4</h3>
-                    <div class="role">UX / UI</div>
+                    <h3>Nombre de Prueba Largo Largo</h3>
+                    <div class="role">Diseñador UX / UI</div>
+                    <div class="desc">Diseñó la experiencia de usuario táctil y visual, así como toda la identidad gráfica y material de presentación.</div>
                 </div>
+
                 <div class="member">
                     <div class="avatar-circle"><i class="fas fa-search"></i></div>
-                    <h3>Nombre 5</h3>
-                    <div class="role">Investigación</div>
+                    <h3>Nombre de Prueba Largo Largo</h3>
+                    <div class="role">Investigador de Mercado</div>
+                    <div class="desc">Validación de la problemática, alineación con los ODS y pruebas de usuario para asegurar la efectividad.</div>
                 </div>
             </div>
         </div>
@@ -632,9 +631,11 @@ void alarmaFin() {
 
     <footer>
         <p><i class="fas fa-code-branch"></i> Proyecto Laboratorio de Innovación 2024</p>
+        <p style="font-size:0.8rem; margin-top:5px;">Desarrollado con Arduino y Pasión.</p>
     </footer>
 
     <script>
+        // Lógica de Pestañas
         function switchTab(tabId, btnElement) {
             document.querySelectorAll('.section').forEach(el => el.classList.remove('active'));
             document.querySelectorAll('.nav-btn').forEach(el => el.classList.remove('active'));
@@ -646,6 +647,11 @@ void alarmaFin() {
                 btnElement.classList.add('active');
             }
             window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Lógica de Zoom (Click / Touch)
+        function toggleZoom(img) {
+            img.classList.toggle('zoomed');
         }
     </script>
 </body>
